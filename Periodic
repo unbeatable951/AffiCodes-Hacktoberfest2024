@@ -1,0 +1,51 @@
+// CPP implementation of the approach
+#include<bits/stdc++.h>
+using namespace std;
+
+	// Function that return true if sub-string 
+	// of length k starting at index i is also 
+	// a prefix of the string
+	bool isPrefix(string str, int len, int i, int k)
+	{
+		// k length sub-string cannot start at index i
+		if (i + k > len)
+			return false;
+		for (int j = 0; j < k; j++) 
+		{
+
+			// Character mismatch between the prefix
+			// and the sub-string starting at index i
+			if (str[i] != str[j])
+				return false;
+			i++;
+		}
+		return true;
+	}
+
+	// Function that returns true if str is K-periodic
+	bool isKPeriodic(string str, int len, int k)
+	{
+		// Check whether all the sub-strings
+		// str[0, k-1], str[k, 2k-1] ... are equal
+		// to the k length prefix of the string
+		for (int i = k; i < len; i += k)
+			if (!isPrefix(str, len, i, k))
+				return false;
+		return true;
+	}
+
+	// Driver code
+	int main()
+	{
+		string str = "geeksgeeks";
+		int len = str.length();
+		int k = 5;
+
+		if (isKPeriodic(str, len, k))
+		cout << ("Yes");
+		else
+		cout << ("No");
+	}
+
+// This code is contributed by
+// Surendra_Gangwar
